@@ -23,7 +23,7 @@ os.popen(f'scw container container deploy {container_id}')
 print('Deployed container, waiting for it to be ready ...')
 time.sleep(5)
 
-retry_count = 12
+retry_count = 18
 
 while retry_count >= 0:
     if container_status(container_id) == 'ready':
@@ -35,5 +35,5 @@ while retry_count >= 0:
         time.sleep(10)
         retry_count -= 1
 
-print('Container is not ready after 2 minutes, exiting')
+print('Container is not ready after 3 minutes, exiting')
 exit(1)
