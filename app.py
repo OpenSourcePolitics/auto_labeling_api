@@ -16,4 +16,4 @@ def ping():
 def predict():
     data = request.get_json()
     classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
-    classifier(data["sequence"], data["labels"])
+    return classifier(data["sequence"], data["labels"])

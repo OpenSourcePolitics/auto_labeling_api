@@ -5,7 +5,7 @@ PORT=5000 \
 FLASK_DEBUG="false" \
 TIMEOUT=120 \
 WORKERS=1 \
-TRANSFORMERS_CACHE="/tmp/transformers" \
+TRANSFORMERS_CACHE="/app/cache" \
 LOGLEVEL=info
 
 WORKDIR /app
