@@ -1,0 +1,16 @@
+import os
+import sys
+from datetime import datetime
+
+TAG = "auto_labelling_api"
+
+os.system("git remote update > /dev/null 2>&1")
+outdated = os.popen('git status -uno').read().find('Your branch is behind')
+
+if outdated > 0 or sys.argv[0] == "update":
+    print("Starting update at " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    os.system("git pull")
+    os.system(f"docker stop {TAG} > /dev/null 2>&1 || true")
+    os.system(f"docker build . --compress --tag {TAG}")
+    os.system(f"docker run --rm -d -it -p 5000:5000 --name {TAG} --rm {TAG}")
+    print("Starting update at " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
