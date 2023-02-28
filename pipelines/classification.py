@@ -3,9 +3,9 @@ from utils.config import cache
 
 
 @cache.memoize()
-def classify(sequence, labels, multi_label=False):
+def classify_sequence(sequence, labels, multi_label=False):
     print("Performing text classification for", sequence)
-    classifier = from_pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
+    classifier = from_pipeline("classification")
     classification = classifier(sequence, labels, multi_label=multi_label)
     return classification_output_for(classification, multi_label)
 

@@ -1,0 +1,6 @@
+{
+  "classification": {
+    "pipeline_name": "zero-shot-classification",
+    "pipeline_model": "facebook/bart-large-mnli"
+  }
+}

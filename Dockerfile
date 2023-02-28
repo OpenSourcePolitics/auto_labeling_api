@@ -13,6 +13,10 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
+COPY pipelines_configuration.json .
+COPY resources.py .
+RUN python resources.py
+
 COPY . .
 
 EXPOSE 5000
