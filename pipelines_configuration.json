@@ -1,6 +1,6 @@
 {
   "classification": {
     "pipeline_name": "zero-shot-classification",
-    "pipeline_model": "facebook/bart-large-mnli"
+    "pipeline_model": "morit/french_xlm_xnli"
   }
 }
