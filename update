@@ -1,18 +1,16 @@
-#!/usr/bin/env python
+#!/usr/bin/env ruby
+# frozen_string_literal: true
 
-import os
-import sys
-from datetime import datetime
+TAG="auto_labelling_api"
 
-TAG = "auto_labelling_api"
+system("git remote update > /dev/null 2>&1")
+outdated = `git status -uno`.include?("Your branch is behind")
 
-os.system("git remote update > /dev/null 2>&1")
-outdated = os.popen('git status -uno').read().find('Your branch is behind')
-
-if outdated > 0 or sys.argv[0] == "update":
-    print("Starting update at " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-    os.system("git pull")
-    os.system(f"docker stop {TAG} > /dev/null 2>&1 || true")
-    os.system(f"docker build . --compress --tag {TAG}")
-    os.system(f"docker run --rm -d -it -p 5000:5000 --name {TAG} --rm {TAG}")
-    print("Starting update at " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+if outdated || ARGV.include?("--force")
+    puts "Starting update at #{Time.now}"
+    system("git pull")
+    system("docker stop #{TAG} > /dev/null 2>&1 || true")
+    system("docker build . --compress --tag #{TAG}")
+    system("docker run --rm -d -it -p 5000:5000 --name #{TAG} --rm #{TAG}")
+    puts "Finishing update at #{Time.now}"
+end
